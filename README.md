@@ -3,3 +3,5 @@
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中对于线程数、缓冲数组的大小、默认下载路径、最大线程数、最小线程数、最大缓冲数组字节数、最小缓冲数组字节数可以通过settings.property进行修改，对于下载记录每次会从tasks.xml读取。并做了一些错误检查及提醒。<br/>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过这个项目练习了多线程对资源的同步、加锁问题，还有Java二进制IO的使用以及怎么对一些可变参数进行灵活修改的问题。<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不足之处：没有添加断点续传功能、界面不够美观。
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装包下载：链接：https://pan.baidu.com/s/13d8FYC0ZDVKjcuy1_xhKcQ 提取码：34po 
