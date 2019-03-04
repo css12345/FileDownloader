@@ -1,0 +1,9 @@
+#settings
+#Mon Mar 04 17:42:36 CST 2019
+maxThreadNum=64
+threadNum=32
+size=10240
+defaultFilePath=D\:\\TestDownload
+minThreadNum=1
+minBufferSize=256
+maxBufferSize=20480

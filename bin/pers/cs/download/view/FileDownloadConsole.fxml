@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pers.cs.download.view.FileDownloadConsoleController">
+   <children>
+      <Label text="多线程下载测试版">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <TabPane prefHeight="366.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="新建任务">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="323.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="26.0" layoutY="20.0" text="URL:" />
+                        <TextField fx:id="newURL" layoutX="64.0" layoutY="16.0" prefHeight="23.0" prefWidth="410.0" />
+                        <Label layoutX="24.0" layoutY="62.0" text="保存文件名：" />
+                        <TextField fx:id="newFileName" layoutX="96.0" layoutY="58.0" prefHeight="23.0" prefWidth="375.0" />
+                        <Label layoutX="24.0" layoutY="107.0" prefHeight="15.0" prefWidth="170.0" text="默认保存路径(在设置中修改)：" />
+                        <Label fx:id="newFilePath" layoutX="24.0" layoutY="133.0" prefHeight="28.0" prefWidth="457.0" />
+                        <Label layoutX="24.0" layoutY="186.0" text="线程数(在设置中修改)：" />
+                        <Label fx:id="newThreadNum" layoutX="153.0" layoutY="182.0" prefHeight="23.0" prefWidth="29.0" />
+                        <Label layoutX="24.0" layoutY="226.0" text="缓冲数组的大小(在设置中进行修改):" />
+                        <Label fx:id="newBufferSize" layoutX="220.0" layoutY="222.0" prefHeight="23.0" prefWidth="50.0" />
+                        <Label layoutX="276.0" layoutY="226.0" text="字节" />
+                        <Button layoutX="188.0" layoutY="277.0" mnemonicParsing="false" onAction="#startDownload" text="开始下载" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="任务详情">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+                     <children>
+                        <TableView fx:id="taskTable" prefHeight="278.0" prefWidth="590.0">
+                           <columns>
+                              <TableColumn fx:id="taskFileName" prefWidth="115.0" text="文件名称" />
+                              <TableColumn fx:id="taskFilePath" prefWidth="107.0" text="存储目录" />
+                              <TableColumn fx:id="taskURL" prefWidth="84.0" text="URL" />
+                              <TableColumn fx:id="taskState" prefWidth="101.0" text="状态" />
+                              <TableColumn fx:id="taskDownloadTime" prefWidth="192.0" text="下载时间" />
+                           </columns>
+                        </TableView>
+                        <HBox spacing="10.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#openFilePath" text="打开文件目录" />
+                              <Button mnemonicParsing="false" onAction="#delete" text="删除" />
+                              <Button mnemonicParsing="false" onAction="#copy" text="复制" />
+                              <Button mnemonicParsing="false" onAction="#reDownload" text="重新下载" />
+                           </children>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </Tab>
+          <Tab text="设置">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="27.0" layoutY="24.0" text="默认下载路径：" />
+                        <TextField fx:id="defaultDownloadPath" layoutX="111.0" layoutY="20.0" prefHeight="23.0" prefWidth="286.0" />
+                        <Button layoutX="440.0" layoutY="20.0" mnemonicParsing="false" onAction="#updateDefaultDownloadPath" text="修改" />
+                        <Label layoutX="27.0" layoutY="68.0" text="默认线程数：" />
+                        <TextField fx:id="defaultThreadNum" layoutX="111.0" layoutY="64.0" prefHeight="23.0" prefWidth="39.0" />
+                        <Button layoutX="440.0" layoutY="64.0" mnemonicParsing="false" onAction="#updateDefaultThreadNum" text="修改" />
+                        <Label layoutX="27.0" layoutY="122.0" text="默认缓冲数组大小：" />
+                        <TextField fx:id="defaultBufferSize" layoutX="135.0" layoutY="118.0" prefHeight="23.0" prefWidth="69.0" />
+                        <Button layoutX="440.0" layoutY="118.0" mnemonicParsing="false" onAction="#updateDefaultBufferSize" text="修改" />
+                        <Label layoutX="212.0" layoutY="122.0" text="字节" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
