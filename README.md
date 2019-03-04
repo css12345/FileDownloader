@@ -5,3 +5,4 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不足之处：没有添加断点续传功能、界面不够美观。
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安装包下载：链接：https://pan.baidu.com/s/13d8FYC0ZDVKjcuy1_xhKcQ 提取码：34po 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载jar及配置文件.zip解压后运行jar（需要JDK）或者之间下载安装包运行（不需要JDK）。
