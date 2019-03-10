@@ -6,7 +6,6 @@ import pers.cs.download.api.Connection;
 import pers.cs.download.api.ConnectionManager;
 import pers.cs.download.api.DownloadListener;
 import pers.cs.download.api.FileManager;
-import pers.cs.download.api.impl.MyConnection;
 import pers.cs.download.entity.Settings;
 
 /**
@@ -39,41 +38,33 @@ public class FileDownloader {
 	}
 
 	/**
-	 * 执行下载的过程，首先连接管理器根据URL打开一个连接，然后当没有读完时，根据读的长度对每个线程进行任务分配，所有线程本次下载结束开始下一次读。
+	 * 执行下载的过程，首先连接管理器根据URL打开一个连接，读取总长度，根据读的长度对每个线程进行任务分配，等待所有线程下载结束发起通知。
 	 * 所有内容读完之后发起下载结束通知。
 	 * @throws IOException 
 	 */
 	public void execute() throws IOException {
 		Connection connection = connectionManager.open(url);
 		int contentLength = -1;
-		long sumLength = 0L;
 		do {
-			contentLength = ((MyConnection)connection).read();
-			if(contentLength == -1)
-				break;
-			int threadNum = Settings.getInstance().THREADNUM;
-			int averageLength = contentLength / threadNum;
-			
-			//前threadNum-1个线程下载平均长度，最后一个线程把剩下的全部下载
-			Thread[] threads = new Thread[threadNum];
-			for(int i = 0;i < threadNum - 1;i++) 
-				threads[i] = new DownloadThread(fileManager,connection,averageLength * i,(averageLength * (i + 1) - 1),sumLength);
-			threads[threadNum - 1] = new DownloadThread(fileManager, connection, averageLength * (threadNum - 1), contentLength - 1,sumLength);
-			
-			sumLength += contentLength;
-			
-			for(int i = 0;i < threadNum;i++)
-				threads[i].start();
-			for(int i = 0;i < threadNum;i++)
-				try {
-					threads[i].join();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			
 			contentLength = connection.getContentLength();
-		} while(contentLength != -1);
+		} while(contentLength == -1);
+		int threadNum = Settings.getInstance().THREADNUM;
+		int averageLength = contentLength / threadNum;
 		
+		//前threadNum-1个线程下载平均长度，最后一个线程把剩下的全部下载
+		Thread[] threads = new Thread[threadNum];
+		for(int i = 0;i < threadNum - 1;i++) 
+			threads[i] = new DownloadThread(fileManager,connectionManager.open(url),averageLength * i,(averageLength * (i + 1) - 1));
+		threads[threadNum - 1] = new DownloadThread(fileManager, connectionManager.open(url), averageLength * (threadNum - 1), contentLength - 1);
+		
+		for(int i = 0;i < threadNum;i++)
+			threads[i].start();
+		for(int i = 0;i < threadNum;i++)
+			try {
+				threads[i].join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		
 		fileManager.close();
 		downloadListener.notifyFinished();

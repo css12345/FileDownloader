@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<tasks/>
+<tasks>
+    <task>
+        <downloadTime>2019-03-10T22:28:28.883</downloadTime>
+        <fileName>Opera_57.0.3098.106_Setup_x64.exe</fileName>
+        <filePath>D:\TestDownload</filePath>
+        <state>下载完成</state>
+        <URL>https://download.operachina.com/pub/opera/desktop/57.0.3098.106/win/Opera_57.0.3098.106_Setup_x64.exe</URL>
+    </task>
+</tasks>

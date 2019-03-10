@@ -4,17 +4,17 @@ public class Settings {
 
 	public String DEFAULT_DOWNLOAD_PATH = System.getProperty("user.home");
 	
-	public int THREADNUM = 32;
-	
-	public int SIZE = 10240;
+	public int THREADNUM = 10;
 	
 	public int MAX_THREAD_NUM = 64;
 	
 	public int MIN_THREAD_NUM = 1;
 	
-	public int MAX_BUFFER_SIZE = 20480;
+	public int MAX_TIMEOUT = 8000;
 	
-	public int MIN_BUFFER_SIZE = 256;
+	public int MIN_TIMEOUT = 5000;
+	
+	public int TIMEOUT = 5000;
 	
 	private static volatile Settings settings;
 	

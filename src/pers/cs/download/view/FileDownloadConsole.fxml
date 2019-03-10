@@ -28,9 +28,9 @@
                         <Label fx:id="newFilePath" layoutX="24.0" layoutY="133.0" prefHeight="28.0" prefWidth="457.0" />
                         <Label layoutX="24.0" layoutY="186.0" text="线程数(在设置中修改)：" />
                         <Label fx:id="newThreadNum" layoutX="153.0" layoutY="182.0" prefHeight="23.0" prefWidth="29.0" />
-                        <Label layoutX="24.0" layoutY="226.0" text="缓冲数组的大小(在设置中进行修改):" />
-                        <Label fx:id="newBufferSize" layoutX="220.0" layoutY="222.0" prefHeight="23.0" prefWidth="50.0" />
-                        <Label layoutX="276.0" layoutY="226.0" text="字节" />
+                        <Label layoutX="24.0" layoutY="226.0" text="超时时间(在设置中进行修改):" />
+                        <Label fx:id="newTimeout" layoutX="220.0" layoutY="222.0" prefHeight="23.0" prefWidth="50.0" />
+                        <Label layoutX="276.0" layoutY="226.0" text="毫秒" />
                         <Button layoutX="188.0" layoutY="277.0" mnemonicParsing="false" onAction="#startDownload" text="开始下载" />
                      </children></AnchorPane>
             </content>
@@ -76,10 +76,10 @@
                         <Label layoutX="27.0" layoutY="68.0" text="默认线程数：" />
                         <TextField fx:id="defaultThreadNum" layoutX="111.0" layoutY="64.0" prefHeight="23.0" prefWidth="39.0" />
                         <Button layoutX="440.0" layoutY="64.0" mnemonicParsing="false" onAction="#updateDefaultThreadNum" text="修改" />
-                        <Label layoutX="27.0" layoutY="122.0" text="默认缓冲数组大小：" />
-                        <TextField fx:id="defaultBufferSize" layoutX="135.0" layoutY="118.0" prefHeight="23.0" prefWidth="69.0" />
-                        <Button layoutX="440.0" layoutY="118.0" mnemonicParsing="false" onAction="#updateDefaultBufferSize" text="修改" />
-                        <Label layoutX="212.0" layoutY="122.0" text="字节" />
+                        <Label layoutX="27.0" layoutY="122.0" text="超时时间大小：" />
+                        <TextField fx:id="defaultTimeout" layoutX="135.0" layoutY="118.0" prefHeight="23.0" prefWidth="69.0" />
+                        <Button layoutX="440.0" layoutY="118.0" mnemonicParsing="false" onAction="#updateDefaultTimeout" text="修改" />
+                        <Label layoutX="212.0" layoutY="122.0" text="毫秒" />
                      </children></AnchorPane>
             </content>
           </Tab>

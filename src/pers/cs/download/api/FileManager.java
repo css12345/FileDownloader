@@ -12,9 +12,8 @@ public interface FileManager {
 	/**
 	 * 移动文件指针到previousDownloadBytes+pos位置
 	 * @param pos 本次的位置
-	 * @param previousDownloadBytes 之前下载的
 	 */
-	void seek(int pos,long previousDownloadBytes);
+	void seek(int pos);
 	
 	/**
 	 * 将数据从data数组中读取length长度写入文件中

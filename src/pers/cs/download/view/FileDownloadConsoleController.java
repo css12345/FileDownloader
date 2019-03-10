@@ -59,7 +59,7 @@ public class FileDownloadConsoleController implements Initializable {
 	@FXML
 	private Label newThreadNum;
 	@FXML
-	private Label newBufferSize;
+	private Label newTimeout;
 
 	@FXML
 	private TableView<Task> taskTable;
@@ -81,7 +81,7 @@ public class FileDownloadConsoleController implements Initializable {
 	@FXML
 	private TextField defaultThreadNum;
 	@FXML
-	private TextField defaultBufferSize;
+	private TextField defaultTimeout;
 	
 	
 	private StartUp startUp;
@@ -168,8 +168,8 @@ public class FileDownloadConsoleController implements Initializable {
 		newThreadNum.setText(defaultThreadNum.getText());
 		
 		
-		defaultBufferSize.setText(String.valueOf(settings.SIZE));
-		newBufferSize.setText(defaultBufferSize.getText());
+		defaultTimeout.setText(String.valueOf(settings.TIMEOUT));
+		newTimeout.setText(defaultTimeout.getText());
 	}
 
 	private void loadSettingsFromFile(File file) {
@@ -181,25 +181,25 @@ public class FileDownloadConsoleController implements Initializable {
 			properties.load(inputStream);
 			String defaultFilePath = properties.getProperty("defaultFilePath");
 			String threadNum = properties.getProperty("threadNum");
-			String size = properties.getProperty("size");
+			String timeout = properties.getProperty("timeout");
 			String maxThreadNum = properties.getProperty("maxThreadNum");
 			String minThreadNum = properties.getProperty("minThreadNum");
-			String maxBufferSize = properties.getProperty("maxBufferSize");
-			String minBufferSize = properties.getProperty("minBufferSize");
+			String maxTimeout = properties.getProperty("maxTimeout");
+			String minTimeout = properties.getProperty("minTimeout");
 			if(defaultFilePath != null)
 				settings.DEFAULT_DOWNLOAD_PATH = defaultFilePath;
 			if(threadNum != null)
 				settings.THREADNUM = Integer.parseInt(threadNum);
-			if(size != null)
-				settings.SIZE = Integer.parseInt(size);
+			if(timeout != null)
+				settings.TIMEOUT = Integer.parseInt(timeout);
 			if(maxThreadNum != null)
 				settings.MAX_THREAD_NUM = Integer.parseInt(maxThreadNum);
 			if(minThreadNum != null)
 				settings.MIN_THREAD_NUM = Integer.parseInt(minThreadNum);
-			if(maxBufferSize != null)
-				settings.MAX_BUFFER_SIZE = Integer.parseInt(maxBufferSize);
-			if(minBufferSize != null)
-				settings.MIN_BUFFER_SIZE = Integer.parseInt(minBufferSize);
+			if(maxTimeout != null)
+				settings.MAX_TIMEOUT = Integer.parseInt(maxTimeout);
+			if(minTimeout != null)
+				settings.MIN_TIMEOUT = Integer.parseInt(minTimeout);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -377,19 +377,19 @@ public class FileDownloadConsoleController implements Initializable {
 			Properties properties = new Properties();
 			String defaultFilePath = settings.DEFAULT_DOWNLOAD_PATH;
 			String threadNum = String.valueOf(settings.THREADNUM);
-			String size = String.valueOf(settings.SIZE);
+			String timeout = String.valueOf(settings.TIMEOUT);
 			String maxThreadNum = String.valueOf(settings.MAX_THREAD_NUM);
 			String minThreadNum = String.valueOf(settings.MIN_THREAD_NUM);
-			String maxBufferSize = String.valueOf(settings.MAX_BUFFER_SIZE);
-			String minBufferSize = String.valueOf(settings.MIN_BUFFER_SIZE);
+			String maxBufferSize = String.valueOf(settings.MAX_TIMEOUT);
+			String minBufferSize = String.valueOf(settings.MIN_TIMEOUT);
 			
 			put(properties,"defaultFilePath",defaultFilePath,System.getProperty("user.home"));
 			put(properties, "threadNum", threadNum, "32");
-			put(properties, "size", size, "10240");
+			put(properties, "timeout", timeout, "5000");
 			put(properties,"maxThreadNum",maxThreadNum,"64");
 			put(properties, "minThreadNum", minThreadNum, "1");
-			put(properties, "maxBufferSize", maxBufferSize, "20480");
-			put(properties,"minBufferSize",minBufferSize,"256");
+			put(properties, "maxTimeout", maxBufferSize, "8000");
+			put(properties,"minTimeout",minBufferSize,"5000");
 			
 			properties.store(outputStream, "settings");
 		} catch (FileNotFoundException e) {
@@ -432,14 +432,14 @@ public class FileDownloadConsoleController implements Initializable {
 		}
 	}
 
-	public void updateDefaultBufferSize() {
+	public void updateDefaultTimeout() {
 		try {
 			Settings settings = Settings.getInstance();
-			int size = Integer.parseInt(defaultBufferSize.getText());
-			if(size >= settings.MIN_BUFFER_SIZE && size <= settings.MAX_BUFFER_SIZE) {
-				settings.SIZE = size;
-				defaultBufferSize.setText(String.valueOf(size));
-				newBufferSize.setText(defaultBufferSize.getText());
+			int timeout = Integer.parseInt(defaultTimeout.getText());
+			if(timeout >= settings.MIN_TIMEOUT && timeout <= settings.MAX_TIMEOUT) {
+				settings.TIMEOUT = timeout;
+				defaultTimeout.setText(String.valueOf(timeout));
+				newTimeout.setText(defaultTimeout.getText());
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setContentText("修改成功！");
 				alert.show();
@@ -448,7 +448,7 @@ public class FileDownloadConsoleController implements Initializable {
 			}
 			else {
 				Alert alert = new Alert(AlertType.ERROR);
-				alert.setContentText("缓冲数组大小应该在" + settings.MIN_BUFFER_SIZE + "到" + settings.MAX_BUFFER_SIZE + "字节之间！");
+				alert.setContentText("超时时间应该在" + settings.MIN_TIMEOUT + "到" + settings.MAX_TIMEOUT + "毫秒之间！");
 				alert.show();
 			}
 		}catch (NumberFormatException e) {

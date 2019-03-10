@@ -11,8 +11,8 @@ import javafx.scene.control.TextArea;
 import pers.cs.download.api.ConnectionManager;
 import pers.cs.download.api.DownloadListener;
 import pers.cs.download.api.FileManager;
-import pers.cs.download.api.impl.MyConnectionManager;
-import pers.cs.download.api.impl.MyFileManager;
+import pers.cs.download.api.impl.ConnectionManagerImpl;
+import pers.cs.download.api.impl.FileManagerImpl;
 import pers.cs.download.entity.Task;
 import pers.cs.download.view.FileDownloadConsoleController;
 import pers.cs.download.view.TaskDownloadController;
@@ -38,7 +38,7 @@ public class FileDownloaderStart {
 		String fullFilePath = task.getFilePath() + File.separatorChar + task.getFileName();
 		File file = new File(fullFilePath);
 		try {
-			fileManager = new MyFileManager(file);
+			fileManager = new FileManagerImpl(file);
 		} catch (FileNotFoundException e1) {
 			dealError(task,file,e1.getMessage());
 		}
@@ -46,7 +46,7 @@ public class FileDownloaderStart {
 		
 		
 		//创建ConnectionManager并设置到fd中
-		ConnectionManager connectionManager = new MyConnectionManager();
+		ConnectionManager connectionManager = new ConnectionManagerImpl();
 		fd.setConnectionManager(connectionManager);
 		
 		
@@ -92,7 +92,7 @@ public class FileDownloaderStart {
 	private void dealSuccess(Task task, TextArea output, long startTime) {
 		task.setState("下载完成");
 		FileDownloadConsoleController.saveTaskDataToFile(tasksFile);
-		((MyFileManager)fileManager).close();
+		((FileManagerImpl)fileManager).close();
 		
 		double costTime = (System.currentTimeMillis() - startTime) / 1000.0;
 		Platform.runLater(() -> {
@@ -116,7 +116,7 @@ public class FileDownloaderStart {
 			alert.show();
 			TaskDownloadController.close();
 		});
-		((MyFileManager)fileManager).close();
+		((FileManagerImpl)fileManager).close();
 		file.delete();
 		return;
 	}
